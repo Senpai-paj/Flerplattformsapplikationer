@@ -1,4 +1,5 @@
 import Image from "next/image";
+import ButtonEx from "@/components/ButtonEx";
 
 export default function Home() {
   return (
