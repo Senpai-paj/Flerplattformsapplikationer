@@ -1,3 +1,4 @@
+/*
 export default ButtonEx = ({ children, onClick, className = "" }) => {
   return (
     <button
@@ -8,3 +9,4 @@ export default ButtonEx = ({ children, onClick, className = "" }) => {
     </button>
   );
 };
+*/
