@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 /* komponent för sökruta. till att söka efter destinationer eller söka bland favoriter */
 
-export default function Search({ onSearch, onRandomDestination, searchTerm, setSearchTerm  }) {
+export default function Search({ onSearch, searchTerm, setSearchTerm  }) {
 
     return (
       <div className="w-full max-w-2xl mx-auto mb-8">
