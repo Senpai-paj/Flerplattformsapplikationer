@@ -1,5 +1,5 @@
 import React from "react";
-import SearchBar from "./SearchBar";
+import SearchBar from "./Search";
 
 /* Navbar till både home page och favorites page */
 
