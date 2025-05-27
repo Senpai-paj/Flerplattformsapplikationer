@@ -7,7 +7,7 @@ import React, { useState } from 'react';
 export default function Search({ onSearch, searchTerm, setSearchTerm  }) {
 
     return (
-      <div className="w-full flex items-center justify-center max-w-2xl mx-auto mb-8">
+      <div className="w-full flex items-center justify-center max-w-2xl mx-auto">
         <div className="w-full">
           <label htmlFor="default-search" className="sr-only">Search</label>
           <div className="relative">

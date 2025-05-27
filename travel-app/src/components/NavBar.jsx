@@ -13,9 +13,9 @@ export default function NavBar({ onMyTripsClick, onBrowseClick }) {
                     DreamTrip {/* Byt text till projektets titel senare */}
                 </div>
 
-                <div className="w-full max-w-lg flex items-center">
+
                     <SearchBar />
-                </div>
+
 
                 <div className="flex items-center">
                     <button
