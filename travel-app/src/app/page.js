@@ -30,12 +30,19 @@ export default function Home() {
         onMyTripsClick={() => router.push("/favorites")}
         handleSearch={handleSearch}
       />
-      <div>
-        <h1>Testing Unsplash</h1>
-        {/*images.map(()=>{
 
-        })*/}
-      </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+          {images.map((image) => (
+            <div key={image.id} className="relative aspect-square">
+              <img
+                src={image.urls.regular}
+                alt={image.alt_description || 'Unsplash image'}
+                className="w-full h-full object-cover rounded-lg"
+              />
+            </div>
+          ))}
+        </div>
+
     </div>
   );
 }
