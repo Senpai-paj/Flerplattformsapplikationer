@@ -1,5 +1,5 @@
-export async function fetchUnsplashImages(query) {
-  const res = await fetch(`/api/unsplash?q=${query}`);
+export async function fetchUnsplashImages(query,pages) {
+  const res = await fetch(`/api/unsplash?q=${query}&page=${pages}`);
 
   if (!res.ok) {
     console.log("Error status: " + res.status);
