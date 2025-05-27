@@ -3,7 +3,7 @@ import SearchBar from "./Search";
 
 /* Navbar till både home page och favorites page */
 
-export default function NavBar({ onMyTripsClick, onBrowseClick }) {
+export default function NavBar({ onMyTripsClick, onBrowseClick, handleSearch }) {
     
     return (
         <nav className="w-full bg-pink-500 text-pink-100 py-4 px-6 shadow-lg">
@@ -14,7 +14,7 @@ export default function NavBar({ onMyTripsClick, onBrowseClick }) {
                 </div>
 
 
-                    <SearchBar />
+                    <SearchBar handleSearch={handleSearch}/>
 
 
                 <div className="flex items-center">

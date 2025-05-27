@@ -4,7 +4,22 @@ import React, { useState } from 'react';
 
 /* komponent för sökruta. till att söka efter destinationer eller söka bland favoriter */
 
-export default function Search({ onSearch, searchTerm, setSearchTerm  }) {
+export default function Search({ onSearch, handleSearch }) {
+
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleKeyDown = async (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      if (!searchTerm.trim()) return;
+
+      try {
+        handleSearch(searchTerm);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
 
     return (
       <div className="w-full flex items-center justify-center max-w-2xl mx-auto">
@@ -21,7 +36,7 @@ export default function Search({ onSearch, searchTerm, setSearchTerm  }) {
               id="default-search" 
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && searchTerm.trim() && onSearch(searchTerm)}
+              onKeyDown={handleKeyDown}
               className="block w-full p-4 ps-10 text-sm text-slate-800 border border-orange-200 rounded-full bg-white/90 backdrop-blur-sm focus:ring-2 focus:ring-orange-300 focus:border-orange-400 shadow-lg placeholder-orange-300"
               placeholder="Sök efter din drömdestination.." 
             />
