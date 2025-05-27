@@ -20,6 +20,10 @@ export default function Home() {
         onBrowseClick={() => router.push("/")}
         onMyTripsClick={() => router.push("/favorites")}
       />
+      <div>
+        <h1>Testing Unsplash</h1>
+        
+      </div>
     </div>
   );
 }
