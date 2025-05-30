@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { fetchUnsplashImages } from "@/utils/unsplash";
 import { serializeUseCacheCacheStore } from "next/dist/server/resume-data-cache/cache-store";
+import PhotoGrid from "@/components/PhotoGrid";
 
 
 export default function Home() {
@@ -49,25 +50,19 @@ export default function Home() {
         handleSearch={handleSearch}
       />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
-          {images.map((image) => (
-            <div key={image.id} className="relative aspect-square">
-              <img
-                src={image.urls.regular}
-                alt={image.alt_description || 'Unsplash image'}
-                className="w-full h-full object-cover rounded-lg"
-              />
-            </div>
-          ))}
-          {images.length > 0 && 
-            <button
-              onClick={getMore}
-              className="mt-4 mb-4 w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            >
-              Load More
-            </button>
-          }
+      <PhotoGrid images={images} />
+        
+      {images.length > 0 && (
+        <div className="flex justify-center mb-10">
+          <button
+            onClick={getMore}
+            className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded"
+          >
+            Load More
+          </button>
         </div>
+      )}
+
     </div>
   );
 }
