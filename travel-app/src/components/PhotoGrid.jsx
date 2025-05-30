@@ -39,6 +39,14 @@ export default function PhotoGrid({ images }) {
                 />
                 </div>
             ))}
+            {Object.keys(liked).some(id => liked[id]) && (
+                <button
+                className="absolute bottom-0 fixed z-10 right-0 m-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                >
+                    Create
+                </button> 
+            )}
+            
         </div>
     );
 }
