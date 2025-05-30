@@ -8,6 +8,7 @@ import { useState } from "react";
 import { fetchUnsplashImages } from "@/utils/unsplash";
 import { serializeUseCacheCacheStore } from "next/dist/server/resume-data-cache/cache-store";
 import PhotoGrid from "@/components/PhotoGrid";
+import Form from "@/components/Form";
 
 
 export default function Home() {
@@ -62,6 +63,8 @@ export default function Home() {
           </button>
         </div>
       )}
+
+      <Form/>
 
     </div>
   );
