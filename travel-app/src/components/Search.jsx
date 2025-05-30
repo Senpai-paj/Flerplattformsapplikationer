@@ -6,20 +6,28 @@ import React, { useState } from 'react';
 
 export default function Search({ onSearch, handleSearch }) {
 
-  const [searchTerm, setSearchTerm] = useState("");
+    const [searchTerm, setSearchTerm] = useState('');
 
-  const handleKeyDown = async (e) => {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      if (!searchTerm.trim()) return;
+    const handleKeyDown = async (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        if (!searchTerm.trim()) return;
 
-      try {
-        handleSearch(searchTerm);
-      } catch (error) {
-        console.error(error);
+        try {
+          handleSearch(searchTerm);
+        } catch (error) {
+          console.error(error);
+        }
       }
+    };
+
+    const randomize = () => {
+      const destinations = require('../data/destinations.json');
+      const randomDestination = destinations[Math.floor(Math.random() * destinations.length)];
+      setSearchTerm(randomDestination);
+      handleSearch(randomDestination)
     }
-  };
+
 
     return (
       <div className="w-full flex items-center justify-center max-w-2xl mx-auto">
@@ -41,10 +49,10 @@ export default function Search({ onSearch, handleSearch }) {
               placeholder="Sök efter din drömdestination.." 
             />
             <button
-            onClick={() => searchTerm.trim() && onSearch(searchTerm)}
+            onClick={randomize}
             className="text-white absolute end-2.5 bottom-2.5 bg-gradient-to-r from-orange-400 to-pink-500 hover:from-orange-500 hover:to-pink-600 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-full text-sm px-6 py-2 transition-all duration-300 shadow-md"
             >
-              Search
+              Random
             </button>
           </div>
         </div>
