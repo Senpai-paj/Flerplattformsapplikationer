@@ -6,6 +6,7 @@ import Search from "@/components/Search";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { fetchUnsplashImages } from "@/utils/unsplash";
+import { fetchDestinations } from "@/utils/destinations";
 import { serializeUseCacheCacheStore } from "next/dist/server/resume-data-cache/cache-store";
 import PhotoGrid from "@/components/PhotoGrid";
 
@@ -21,6 +22,8 @@ export default function Home() {
     setQuery(searchTerm);
     setPages(1)
     try {
+      const data = await fetchDestinations(searchTerm);
+      
       const results = await fetchUnsplashImages(searchTerm, 1);
       setImages(results);
       console.log(results);
