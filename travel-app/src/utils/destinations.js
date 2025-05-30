@@ -12,7 +12,7 @@ export async function fetchDestinations(query, includeDetails = false) {
   }
   
   
-  // Will be implemented soon, details of a place
+  
   export async function fetchDestinationsDetailed(query) {
     return fetchDestinations(query, true);
   }
