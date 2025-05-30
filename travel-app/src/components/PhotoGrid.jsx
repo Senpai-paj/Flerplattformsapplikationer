@@ -41,7 +41,7 @@ export default function PhotoGrid({ images }) {
             ))}
             {Object.keys(liked).some(id => liked[id]) && (
                 <button
-                className="absolute bottom-0 fixed z-10 right-0 m-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                className="absolute bottom-0 fixed z-10 right-0 m-4 bg-[#BADFDC] hover:bg-[#539287] text-[#539287] hover:text-[#BADFDC] ease-in-out duration-300 cursor-pointer font-bold py-7 px-4 rounded-full"
                 >
                     Create
                 </button> 
