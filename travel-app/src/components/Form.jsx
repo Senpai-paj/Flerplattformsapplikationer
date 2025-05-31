@@ -6,7 +6,20 @@ export default function Form({ likedImages, handleCancel }) {
     const [description, setDescription] = useState('');
 
     const handleCreateClick = () => {
-        handleCreate({ title, destination, description });
+        const tripData = {
+            id: Date.now(), 
+            images: likedImages,
+            title: title,
+            description: description,
+            destination: destination
+        };
+
+        console.log('Trip Data:', tripData);
+
+        const existingTrips = JSON.parse(localStorage.getItem('trips') || '[]');
+        existingTrips.push(tripData);
+        localStorage.setItem('trips', JSON.stringify(existingTrips));
+        handleCancel();
     };
 
     return (
