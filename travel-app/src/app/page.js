@@ -9,6 +9,7 @@ import { fetchUnsplashImages } from "@/utils/unsplash";
 import { fetchDestinations } from "@/utils/destinations";
 import { serializeUseCacheCacheStore } from "next/dist/server/resume-data-cache/cache-store";
 import PhotoGrid from "@/components/PhotoGrid";
+import Form from "@/components/Form";
 
 
 export default function Home() {
@@ -18,6 +19,7 @@ export default function Home() {
   const [likedImages, setLikedImages] = useState([]);
   const [query, setQuery] = useState("");
   const [pages, setPages] = useState(1);
+  const [isVisible, setIsVisible] = useState(false);
 
   async function handleSearch(searchTerm) {
     setQuery(searchTerm);
@@ -70,6 +72,8 @@ export default function Home() {
           </button>
         </div>
       )}
+
+      {isVisible && <Form likedImages={likedImages}/>}
 
     </div>
   );
