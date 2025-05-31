@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export default function Form({ likedImages, handleCancel }) {
+export default function Form({ likedImages, handleCancel, destination }) {
     const [title, setTitle] = useState('');
     const [destination, setDestination] = useState('');
     const [description, setDescription] = useState('');
