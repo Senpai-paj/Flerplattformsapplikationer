@@ -21,7 +21,7 @@ export default function Form({ likedImages, handleCancel, destination }) {
     };
 
     return (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center">
+        <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center">
             <div className="bg-white p-8 w-1/2 h-11/12 rounded-lg overflow-y-auto">
                 <h2 className="text-2xl font-bold mb-4 text-orange-500">Create New Trip</h2>
                 
