@@ -17,6 +17,7 @@ export default function Home() {
   const [images, setImages] = useState([]);
   const [query, setQuery] = useState("");
   const [pages, setPages] = useState(1);
+  const [isVisible, setIsVisible] = useState(false);
 
   async function handleSearch(searchTerm) {
     setQuery(searchTerm);
@@ -64,7 +65,7 @@ export default function Home() {
         </div>
       )}
 
-      <Form/>
+      {isVisible && <Form likedImages={likedImages}/>}
 
     </div>
   );
