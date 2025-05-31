@@ -32,14 +32,14 @@ export default function Form({ likedImages, handleCancel }) {
                     <label htmlFor="title" className="block text-sm font-medium text-gray-700">Title</label>
                     <input type="text" id="title" value={title} 
                         onChange={e => setTitle(e.target.value)} 
-                        className="mt-1 p-2 block w-full rounded-md border border-gray-300" 
+                        className="mt-1 p-2 block w-full rounded-md border border-gray-300 focus:border-orange-500 focus:outline-orange-500" 
                     />
                 </div>
                 <div className="mb-4">
                     <label htmlFor="destination" className="block text-sm font-medium text-gray-700">Destination</label>
                     <input type="text" id="destination" value={destination} 
                         onChange={e => setDestination(e.target.value)} 
-                        className="mt-1 p-2 block w-full rounded-md border border-gray-300" 
+                        className="mt-1 p-2 block w-full rounded-md border border-gray-300 focus:border-orange-500 focus:outline-orange-500" 
                     />
                 </div>
                 <div className="mb-4">
@@ -48,16 +48,16 @@ export default function Form({ likedImages, handleCancel }) {
                         id="description" 
                         value={description} 
                         onChange={e => setDescription(e.target.value)} 
-                        className="mt-1 p-2 block w-full rounded-md border border-gray-300" 
+                        className="mt-1 p-2 h-48 block w-full rounded-md border border-gray-300 focus:border-orange-500 focus:outline-orange-500" 
                     />
                 </div>
                 <div className="flex justify-end">
                     <button onClick={handleCancel} 
-                        className="mr-2 border border-red-500 text-red-500 hover:bg-red-500 hover:text-white font-bold py-2 px-4 rounded">
+                        className="mr-2 bg-pink-100 hover:bg-pink-200 text-pink-500 font-bold py-2 px-4 rounded-full">
                             Cancel
                         </button>
                     <button onClick={handleCreateClick} 
-                        className=" bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                        className="bg-pink-500 hover:bg-pink-700 text-pink-50 font-bold py-2 px-4 rounded-full">
                         Create
                     </button>
                 </div>
