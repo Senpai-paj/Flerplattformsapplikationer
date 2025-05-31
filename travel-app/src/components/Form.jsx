@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 
 export default function Form({ likedImages, handleCancel, destination }) {
     const [title, setTitle] = useState('');
-    const [destination, setDestination] = useState('');
     const [description, setDescription] = useState('');
 
     const handleCreateClick = () => {
@@ -15,16 +14,16 @@ export default function Form({ likedImages, handleCancel, destination }) {
             description: description
         };
 
-        const existedTrips = JSON.parse(localStorage.getItem('trips'));
+        const existedTrips = JSON.parse(localStorage.getItem('trips')) || [];
         existedTrips.push(savedTrip)
         localStorage.setItem('trips', JSON.stringify(existedTrips));
         handleCancel();
     };
 
     return (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center">
-            <div className="bg-white p-8 xl:w-1/3 w-11/12 xl:h-2/3 h-11/12 rounded-lg overflow-y-auto">
-                <h2 className="text-2xl font-bold mb-4">Create New Trip</h2>
+        <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center">
+            <div className="bg-white p-8 w-1/2 h-11/12 rounded-lg overflow-y-auto">
+                <h2 className="text-2xl font-bold mb-4 text-orange-500">Create New Trip</h2>
                 
                 <div className="mb-6">
                     <div className="flex overflow-x-auto gap-4 pb-4 snap-x snap-mandatory">
@@ -48,19 +47,12 @@ export default function Form({ likedImages, handleCancel, destination }) {
                     />
                 </div>
                 <div className="mb-4">
-                    <label htmlFor="destination" className="block text-sm font-medium text-gray-700">Destination</label>
-                    <input type="text" id="destination" value={destination} 
-                        onChange={e => setDestination(e.target.value)} 
-                        className="mt-1 p-2 block w-full rounded-md border border-gray-300 focus:border-orange-500 focus:outline-orange-500" 
-                    />
-                </div>
-                <div className="mb-4">
                     <label htmlFor="description" className="text-sm font-medium text-gray-700">Description</label>
                     <textarea 
                         id="description" 
                         value={description} 
                         onChange={e => setDescription(e.target.value)} 
-                        className="mt-1 p-2 h-48 block w-full rounded-md border border-gray-300 focus:border-orange-500 focus:outline-orange-500" 
+                        className="mt-1 p-2 h-40 block w-full rounded-md border border-gray-300 focus:border-orange-500 focus:outline-orange-500" 
                     />
                 </div>
                 <div className="flex justify-end">
