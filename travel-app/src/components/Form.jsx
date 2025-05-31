@@ -23,7 +23,7 @@ export default function Form({ likedImages, handleCancel }) {
                 
                 <div className="mb-6">
                     <div className="flex overflow-x-auto gap-4 pb-4 snap-x snap-mandatory">
-                        {sampleImages.map((image, index) => (
+                        {likedImages.map((image, index) => (
                             <div key={index} className="flex-none snap-center">
                                 <img 
                                     src={image} 

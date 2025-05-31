@@ -49,7 +49,12 @@ export default function Home() {
   const openForm = (liked) => {
     setLikedImages(liked);
     console.log(liked);
+    setIsVisible(true);
     //add display styiling when form added
+  }
+
+  const closeForm = () => {
+    setIsVisible(false);
   }
 
   return (
@@ -73,7 +78,7 @@ export default function Home() {
         </div>
       )}
 
-      {isVisible && <Form likedImages={likedImages}/>}
+      {isVisible && <Form likedImages={likedImages} handleCancel={closeForm}/>}
 
     </div>
   );
