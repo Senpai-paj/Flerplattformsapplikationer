@@ -4,15 +4,20 @@ import { HeartIcon as HeartSolid } from "@heroicons/react/24/solid";
 
 /* grid layout och styling för hur fotona presenteras vid sök eller bland favoriter */
 
-export default function PhotoGrid({ images }) {
+export default function PhotoGrid({ images, createTrip }) {
    
     const [liked, setLiked] = useState({});
 
-    const toggleLike = (id) => {
-        setLiked((prev) => ({
-        ...prev,
-        [id]: !prev[id],
-        }));
+    const toggleLike = (id, url) => {
+        setLiked((prev) => {
+            const newState = { ...prev };
+            if (prev[id]) {
+                delete newState[id];
+            } else {
+                newState[id] = { liked: true, url };
+            }
+            return newState;
+        });
     };
 
     return (
@@ -23,7 +28,7 @@ export default function PhotoGrid({ images }) {
 
                 <div
                     className="absolute top-2 right-2 z-10 cursor-pointer"
-                    onClick={() => toggleLike(image.id)}
+                    onClick={() => toggleLike(image.id, image.urls.regular)}
                 >
                     {liked[image.id] ? (
                     <HeartSolid className="w-6 h-6 text-red-500" />
@@ -41,6 +46,7 @@ export default function PhotoGrid({ images }) {
             ))}
             {Object.keys(liked).some(id => liked[id]) && (
                 <button
+                onClick={() => createTrip(liked)}
                 className="absolute bottom-0 fixed z-10 right-0 m-4 bg-[#BADFDC] hover:bg-[#539287] text-[#539287] hover:text-[#BADFDC] ease-in-out duration-300 cursor-pointer font-bold py-7 px-4 rounded-full"
                 >
                     Create

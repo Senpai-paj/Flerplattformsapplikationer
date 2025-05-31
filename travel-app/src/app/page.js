@@ -16,6 +16,7 @@ export default function Home() {
 
   const router = useRouter();
   const [images, setImages] = useState([]);
+  const [likedImages, setLikedImages] = useState([]);
   const [query, setQuery] = useState("");
   const [pages, setPages] = useState(1);
   const [isVisible, setIsVisible] = useState(false);
@@ -24,8 +25,6 @@ export default function Home() {
     setQuery(searchTerm);
     setPages(1)
     try {
-      const data = await fetchDestinations(searchTerm);
-      
       const results = await fetchUnsplashImages(searchTerm, 1);
       setImages(results);
       console.log(results);
@@ -47,6 +46,12 @@ export default function Home() {
     }
   }
 
+  const openForm = (liked) => {
+    setLikedImages(liked);
+    console.log(liked);
+    //add display styiling when form added
+  }
+
   return (
     <div >
       <NavBar
@@ -55,7 +60,7 @@ export default function Home() {
         handleSearch={handleSearch}
       />
 
-      <PhotoGrid images={images} />
+      <PhotoGrid images={images} createTrip={openForm} />
         
       {images.length > 0 && (
         <div className="flex justify-center mb-10">
