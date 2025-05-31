@@ -8,7 +8,7 @@ export default function PhotoGrid({ images, createTrip }) {
    
     const [liked, setLiked] = useState([]);
 
-    const toggleLike = (id, url) => {
+    const toggleLike = (url) => {
         setLiked(prev => {
             if (prev.includes(url)) {
                 return prev.filter(u => u !== url);
@@ -25,7 +25,7 @@ export default function PhotoGrid({ images, createTrip }) {
 
                 <div
                     className="absolute top-2 right-2 z-10 cursor-pointer"
-                    onClick={() => toggleLike(image.id, image.urls.regular)}
+                    onClick={() => toggleLike(image.urls.regular)}
                 >
                     {liked.includes(image.urls.regular) ? (
                     <HeartSolid className="w-6 h-6 text-red-500" />
