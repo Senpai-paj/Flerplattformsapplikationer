@@ -78,7 +78,12 @@ export default function Home() {
         </div>
       )}
 
-      {isVisible && <Form likedImages={likedImages} handleCancel={closeForm}/>}
+      {isVisible &&
+      <Form
+        likedImages={likedImages}
+        destination={query}
+        handleCancel={closeForm}
+      />}
 
     </div>
   );

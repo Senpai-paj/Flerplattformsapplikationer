@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 
-export default function Form({ likedImages, handleCancel }) {
+export default function Form({ likedImages, handleCancel, destination }) {
     const [title, setTitle] = useState('');
-    const [destination, setDestination] = useState('');
     const [description, setDescription] = useState('');
 
     const handleCreateClick = () => {
@@ -15,7 +14,7 @@ export default function Form({ likedImages, handleCancel }) {
             description: description
         };
 
-        const existedTrips = JSON.parse(localStorage.getItem('trips'));
+        const existedTrips = JSON.parse(localStorage.getItem('trips')) || [];
         existedTrips.push(savedTrip)
         localStorage.setItem('trips', JSON.stringify(existedTrips));
         handleCancel();
@@ -48,19 +47,12 @@ export default function Form({ likedImages, handleCancel }) {
                     />
                 </div>
                 <div className="mb-4">
-                    <label htmlFor="destination" className="block text-sm font-medium text-gray-700">Destination</label>
-                    <input type="text" id="destination" value={destination} 
-                        onChange={e => setDestination(e.target.value)} 
-                        className="mt-1 p-2 block w-full rounded-md border border-gray-300 focus:border-orange-500 focus:outline-orange-500" 
-                    />
-                </div>
-                <div className="mb-4">
                     <label htmlFor="description" className="text-sm font-medium text-gray-700">Description</label>
                     <textarea 
                         id="description" 
                         value={description} 
                         onChange={e => setDescription(e.target.value)} 
-                        className="mt-1 p-2 h-48 block w-full rounded-md border border-gray-300 focus:border-orange-500 focus:outline-orange-500" 
+                        className="mt-1 p-2 h-40 block w-full rounded-md border border-gray-300 focus:border-orange-500 focus:outline-orange-500" 
                     />
                 </div>
                 <div className="flex justify-end">
