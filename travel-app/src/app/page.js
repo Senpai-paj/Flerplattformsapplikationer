@@ -147,7 +147,7 @@ export default function Home() {
         <div className="flex justify-center mb-10">
           <button
             onClick={getMore}
-            className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded"
+            className="text-white bg-gradient-to-r from-orange-400 to-pink-500 hover:from-orange-500 hover:to-pink-600 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-full text-sm h-[48px] px-6 transition-all duration-300 shadow-md"
           >
             Load More
           </button>
