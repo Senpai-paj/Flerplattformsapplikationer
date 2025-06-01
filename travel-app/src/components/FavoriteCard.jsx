@@ -72,14 +72,14 @@ export default function FavotiteCard() {
                             )}
                         </figure>
 
-                        <div className="card-body flex flex-col justify-center items-center text-center">
+                        <div className="card-body flex flex-col justify-center items-center text-center w-full">
                             <h2 
                                 className="card-title font-bold text-xl cursor-pointer hover:text-pink-500 transition-colors duration-300"
                             >
                                 {trip.title}
                             </h2>
                             <div 
-                                className={`overflow-hidden text-justify transition-all ease-in-out absolute bg-white bottom-0 duration-300 overflow-y-auto cursor-default ${
+                                className={`overflow-hidden text-justify transition-all ease-in-out absolute bg-white bottom-0 duration-300 overflow-y-auto cursor-default w-full ${
                                     expandedCard === trip.id ? ' max-h-40 opacity-100' : 'max-h-0 opacity-0'
                                 }`}
                             >
