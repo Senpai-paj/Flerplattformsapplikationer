@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import FavoriteCard from "./FavoriteCard";
 
-export default function FavotiteGrid() {
+export default function FavoriteGrid() {
    
     const [trips, setTrips] = useState([]);
 

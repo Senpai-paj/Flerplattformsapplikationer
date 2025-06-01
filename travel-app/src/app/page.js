@@ -1,8 +1,6 @@
 "use client";
 
-import Hero from "@/components/Hero";
 import NavBar from "@/components/NavBar";
-import Search from "@/components/Search";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { fetchUnsplashImages } from "@/utils/unsplash";
