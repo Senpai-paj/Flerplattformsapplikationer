@@ -31,21 +31,29 @@ export default function FavotiteCard() {
                 <div
                     key={trip.id}
                     className="relative bg-white rounded-lg shadow-md overflow-hidden bg-blue-500">
-                    <figure className="w-full h-64">
-                        <Slider {...carouselSettings}>
-                            {trip.images.map((url, idx) => (
-                            <div key={idx}>
-                                <img
-                                src={url}
-                                alt={`Trip ${trip.title} - ${idx}`}
+                    <figure className="w-full h-64 mb-5">
+                        {trip.images.length > 1 ? (
+                            <Slider {...carouselSettings}>
+                                {trip.images.map((url, idx) => (
+                                <div key={idx}>
+                                    <img
+                                    src={url}
+                                    alt={`Trip ${trip.title} - ${idx}`}
+                                    className="w-full h-64 object-cover"
+                                    />
+                                </div>
+                                ))}
+                            </Slider>
+                        ) : (
+                            <img
+                                src={trip.images[0]}
+                                alt={`Trip ${trip.title}`}
                                 className="w-full h-64 object-cover"
-                                />
-                            </div>
-                            ))}
-                        </Slider>
+                            />
+                        )}
                     </figure>
 
-                    <div className="card-body h-15 text-center">
+                    <div className="card-body flex flex-col justify-center items-center h-10 text-center">
                         <h2 className="card-title font-bold text-xl">
                             {trip.title}
                         </h2>
