@@ -46,7 +46,7 @@ export default function Search({ onSearch, handleSearch }) {
               onChange={(e) => setSearchTerm(e.target.value)}
               onKeyDown={handleKeyDown}
               className="block w-full p-4 ps-10 text-sm text-slate-800 border border-orange-200 rounded-full bg-white/90 backdrop-blur-sm focus:ring-2 focus:ring-orange-300 focus:border-orange-400 shadow-lg placeholder-orange-300"
-              placeholder="Sök efter din drömdestination.." 
+              placeholder="Search for your dream destination and press Enter" 
             />
             <button
             onClick={randomize}
