@@ -9,6 +9,7 @@ import "slick-carousel/slick/slick-theme.css";
 export default function FavotiteCard() {
    
     const [trips, setTrips] = useState([]);
+    const [expandedCard, setExpandedCard] = useState(null);
 
     useEffect(() => {
         const storedTrips = JSON.parse(localStorage.getItem("trips")) || [];
@@ -24,11 +25,16 @@ export default function FavotiteCard() {
         slidesToScroll: 1,
     };
 
+    const toggleDescription = (tripId) => {
+        setExpandedCard(expandedCard === tripId ? null : tripId);
+    };
+
     return (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
             {trips.length > 0 ? (
                 trips.map((trip) => (
                     <div
+                        onClick={() => toggleDescription(trip.id)}
                         key={trip.id}
                         className="relative bg-white rounded-lg shadow-md overflow-hidden bg-blue-500">
                         <figure className="w-full h-64 mb-5">
@@ -53,10 +59,25 @@ export default function FavotiteCard() {
                             )}
                         </figure>
 
-                        <div className="card-body flex flex-col justify-center items-center h-10 text-center">
-                            <h2 className="card-title font-bold text-xl">
+                        <div className="card-body flex flex-col justify-center items-center text-center">
+                            <h2 
+                                className="card-title font-bold text-xl cursor-pointer hover:text-pink-500 transition-colors duration-300"
+                            >
                                 {trip.title}
                             </h2>
+                            <div 
+                                className={`overflow-hidden text-justify transition-all ease-in-out absolute bg-white bottom-0 duration-300 overflow-y-auto cursor-default ${
+                                    expandedCard === trip.id ? ' max-h-40 opacity-100' : 'max-h-0 opacity-0'
+                                }`}
+                            >
+                                <h2 className="mx-4 mt-2 font-bold">
+                                    {trip.destination}
+                                </h2>
+                                <p className="text-gray-700 px-4">
+                                    {trip.description}
+                                </p>
+                                
+                            </div>
                         </div>
                     </div>
                 ))
