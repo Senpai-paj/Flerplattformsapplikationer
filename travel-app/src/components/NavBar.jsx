@@ -1,5 +1,5 @@
 import React from "react";
-import SearchBar from "./Search";
+import Search from "./Search";
 import { usePathname } from "next/navigation";
 
 /* Navbar till både home page och favorites page */
@@ -19,7 +19,7 @@ export default function NavBar({ onMyTripsClick, onBrowseClick, handleSearch}) {
                     <div className={`w-full max-w-lg flex items-center
                         ${pathname === "/favorites" ? "invisible" : ""}`
                         }>
-                        <SearchBar handleSearch={handleSearch}/>
+                        <Search handleSearch={handleSearch}/>
                     </div>
 
                     <div className="flex items-center gap-4">
@@ -47,7 +47,7 @@ export default function NavBar({ onMyTripsClick, onBrowseClick, handleSearch}) {
                     </div>
 
                     <div className={`w-full ${pathname === "/favorites" ? "invisible" : ""}`}>
-                        <SearchBar handleSearch={handleSearch}/>
+                        <Search handleSearch={handleSearch}/>
                     </div>
 
                     <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
