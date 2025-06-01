@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import FavoriteCard from "./FavoriteCard";
 
-/* Utseende för favorit-cards plus "baksida" av kortet med info om resan */
-
 export default function FavotiteGrid() {
    
     const [trips, setTrips] = useState([]);

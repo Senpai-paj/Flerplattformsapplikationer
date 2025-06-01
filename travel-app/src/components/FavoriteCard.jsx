@@ -5,11 +5,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { TrashIcon } from "@heroicons/react/24/outline";
 
-
-export default function FavoriteCard ( {trip, setTrips} ) {
-
+export default function FavoriteCard({ trip, setTrips }) {
     const [expandedCard, setExpandedCard] = useState(null);
-
 
     const carouselSettings = {
         arrows: true,
@@ -26,17 +23,18 @@ export default function FavoriteCard ( {trip, setTrips} ) {
 
     const handleDelete = (tripId, e) => {
         e.stopPropagation(); // Prevent card expansion when clicking delete
-        const updatedTrips = trips.filter(trip => trip.id !== tripId);
-        setTrips(updatedTrips);
-        localStorage.setItem('trips', JSON.stringify(updatedTrips));
+        setTrips(prevTrips => {
+            const updatedTrips = prevTrips.filter(t => t.id !== tripId);
+            localStorage.setItem('trips', JSON.stringify(updatedTrips));
+            return updatedTrips;
+        });
     };
 
-    return (
-        trip &&
+    return trip && (
         <div
             onClick={() => toggleDescription(trip.id)}
-            key={trip.id}
-            className="relative bg-white rounded-lg shadow-md overflow-hidden bg-blue-500">
+            className="relative bg-white rounded-lg shadow-md overflow-hidden bg-blue-500"
+        >
             <button
                 onClick={(e) => handleDelete(trip.id, e)}
                 className="absolute top-2 right-2 z-20 p-2 bg-white/80 hover:bg-white rounded-full transition-all duration-300 shadow-md"
@@ -85,9 +83,5 @@ export default function FavoriteCard ( {trip, setTrips} ) {
                 </div>
             </div>
         </div>
-
-
-
-    )
-
+    );
 }
