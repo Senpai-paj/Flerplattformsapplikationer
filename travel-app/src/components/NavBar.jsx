@@ -40,19 +40,16 @@ export default function NavBar({ onMyTripsClick, onBrowseClick, handleSearch}) {
 
                 {/* Mobile Layout */}
                 <div className="md:hidden space-y-4">
-                    
                     <div className="flex justify-center">
                         <div className="text-2xl font-semibold">
                             DreamTrip
                         </div>
                     </div>
 
-                   
                     <div className={`w-full ${pathname === "/favorites" ? "invisible" : ""}`}>
                         <SearchBar handleSearch={handleSearch}/>
                     </div>
 
-                    
                     <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
                         <button
                             onClick={onBrowseClick}
