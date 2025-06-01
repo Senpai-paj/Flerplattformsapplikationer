@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
-
+import { TrashIcon } from "@heroicons/react/24/outline";
 
 /* Utseende för favorit-cards plus "baksida" av kortet med info om resan */
 
@@ -29,6 +29,13 @@ export default function FavotiteCard() {
         setExpandedCard(expandedCard === tripId ? null : tripId);
     };
 
+    const handleDelete = (tripId, e) => {
+        e.stopPropagation(); // Prevent card expansion when clicking delete
+        const updatedTrips = trips.filter(trip => trip.id !== tripId);
+        setTrips(updatedTrips);
+        localStorage.setItem('trips', JSON.stringify(updatedTrips));
+    };
+
     return (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
             {trips.length > 0 ? (
@@ -37,6 +44,12 @@ export default function FavotiteCard() {
                         onClick={() => toggleDescription(trip.id)}
                         key={trip.id}
                         className="relative bg-white rounded-lg shadow-md overflow-hidden bg-blue-500">
+                        <button
+                            onClick={(e) => handleDelete(trip.id, e)}
+                            className="absolute top-2 right-2 z-20 p-2 bg-white/80 hover:bg-white rounded-full transition-all duration-300 shadow-md"
+                        >
+                            <TrashIcon className="w-5 h-5 text-red-500" />
+                        </button>
                         <figure className="w-full h-64 mb-5">
                             {trip.images.length > 1 ? (
                                 <Slider {...carouselSettings}>
@@ -76,7 +89,6 @@ export default function FavotiteCard() {
                                 <p className="text-gray-700 px-4">
                                     {trip.description}
                                 </p>
-                                
                             </div>
                         </div>
                     </div>
