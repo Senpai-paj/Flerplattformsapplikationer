@@ -1,10 +1,12 @@
 import React from "react";
 import SearchBar from "./Search";
+import { usePathname } from "next/navigation";
 
 /* Navbar till både home page och favorites page */
 
-export default function NavBar({ onMyTripsClick, onBrowseClick, handleSearch }) {
-    
+export default function NavBar({ onMyTripsClick, onBrowseClick }) {
+    const pathname = usePathname();
+
     return (
         <nav className="w-full bg-pink-500 text-pink-100 py-4 px-6 shadow-lg">
             <div className="flex items-center justify-between gap-6 max-w-screen-xl mx-auto">
@@ -13,9 +15,11 @@ export default function NavBar({ onMyTripsClick, onBrowseClick, handleSearch }) 
                     DreamTrip {/* Byt text till projektets titel senare */}
                 </div>
 
-
-                    <SearchBar handleSearch={handleSearch}/>
-
+                <div className={`w-full max-w-lg flex items-center
+                    ${pathname === "/favorites" ? "invisible" : ""}`
+                    }>
+                    <SearchBar />
+                </div>
 
                 <div className="flex items-center">
                     <button
@@ -37,4 +41,3 @@ export default function NavBar({ onMyTripsClick, onBrowseClick, handleSearch }) 
         </nav>
     );
 }
-
