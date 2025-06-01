@@ -30,6 +30,37 @@ export async function GET(request) {
             }, { status: 404 });
         }
 
+        let destinationDescription = null;
+
+        try {
+            const destinationSearchUrl = `https://api.opentripmap.com/0.1/en/places/autosuggest?name=${encodeURIComponent(query)}&radius=50000&lon=${geoData.lon}&lat=${geoData.lat}&kinds=countries,administrative,cities&limit=5&apikey=${process.env.OPENTRIPMAP_API_KEY}`;
+            const destinationSearchResponse = await fetch(destinationSearchUrl);
+
+            if (destinationSearchResponse.ok) {
+                const destinationSearchData = await destinationSearchResponse.json();
+                
+                if (destinationSearchData.features && destinationSearchData.features.length > 0) {
+                    const firstResult = destinationSearchData.features[0];
+                    if (firstResult.properties && firstResult.properties.xid) {
+                        const detailUrl = `https://api.opentripmap.com/0.1/en/places/xid/${firstResult.properties.xid}?apikey=${process.env.OPENTRIPMAP_API_KEY}`;
+                        const detailResponse = await fetch(detailUrl);
+
+                        if (detailResponse.ok) {
+                            const detailData = await detailResponse.json();
+
+                            if (detailData.wikipedia_extracts && detailData.wikipedia_extracts.text) {
+                                destinationDescription = detailData.wikipedia_extracts.text;
+                            } else if (detailData.info && detailData.info.descr) {
+                                destinationDescription = detailData.info.descr;
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (error) {
+
+        }
+
 
         const radius = 5000; // 5km radius
         const attractionsUrl = `https://api.opentripmap.com/0.1/en/places/radius?radius=${radius}&lon=${geoData.lon}&lat=${geoData.lat}&kinds=interesting_places&format=json&limit=20&apikey=${process.env.OPENTRIPMAP_API_KEY}`;
@@ -54,7 +85,6 @@ export async function GET(request) {
     }   
 
         const attractionsData = await attractionsResponse.json();
-
         const detailedAttractions = [];
         const topAttractions = attractionsData.slice(0, 10); 
 
