@@ -54,6 +54,7 @@ export default function Home() {
   }
 
   const closeForm = () => {
+    setLikedImages([]);
     setIsVisible(false);
   }
 

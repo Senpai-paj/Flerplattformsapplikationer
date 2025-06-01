@@ -18,6 +18,13 @@ export default function PhotoGrid({ images, createTrip }) {
         });
     };
 
+    const handleCreateTrip = () => {
+        createTrip(liked);
+        setLiked([]);
+    }
+
+
+
     return (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
             {images.map((image) => (
@@ -43,7 +50,7 @@ export default function PhotoGrid({ images, createTrip }) {
             ))}
             {liked.length > 0 && (
                 <button
-                    onClick={() => createTrip(liked)}
+                    onClick={() => handleCreateTrip(liked)}
                     className="absolute bottom-0 fixed z-10 right-0 m-4 bg-[#BADFDC] hover:bg-[#539287] text-[#539287] hover:text-[#BADFDC] ease-in-out duration-300 cursor-pointer font-bold py-7 px-4 rounded-full"
                 >
                     Create
