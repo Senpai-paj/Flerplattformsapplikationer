@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 
 /* Navbar till både home page och favorites page */
 
-export default function NavBar({ onMyTripsClick, onBrowseClick }) {
+export default function NavBar({ onMyTripsClick, onBrowseClick, handleSearch}) {
     const pathname = usePathname();
 
     return (
@@ -18,7 +18,7 @@ export default function NavBar({ onMyTripsClick, onBrowseClick }) {
                 <div className={`w-full max-w-lg flex items-center
                     ${pathname === "/favorites" ? "invisible" : ""}`
                     }>
-                    <SearchBar />
+                    <SearchBar handleSearch={handleSearch}/>
                 </div>
 
                 <div className="flex items-center">
