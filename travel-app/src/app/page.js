@@ -9,7 +9,6 @@ import { serializeUseCacheCacheStore } from "next/dist/server/resume-data-cache/
 import PhotoGrid from "@/components/PhotoGrid";
 import Form from "@/components/Form";
 
-
 export default function Home() {
 
   const router = useRouter();
@@ -40,7 +39,6 @@ export default function Home() {
       setDestinationData(destinationResult);
       setImages(imageResults);
 
-
       console.log('Destination data:', destinationResult);
       console.log('Images:', imageResults);
     } catch (error) {
@@ -61,7 +59,6 @@ export default function Home() {
     }
   }
   
-
   async function getMore() {
     let number = pages + 1;
     setPages(number);
@@ -88,7 +85,6 @@ export default function Home() {
   }
 
   return (
-    <div >
     <div>
       <NavBar
         onBrowseClick={() => router.push("/")}
