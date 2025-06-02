@@ -28,9 +28,10 @@ and / or
 - npm install react-slick slick-carousel
 
 4. Set up environment:
-Add the following API keys, replace with the actual key 
-OPENTRIPMAP_API_KEY=your_opentripmap_api_key
-UNSPLASH_ACCESS_KEY=your_unsplash_access_key
+First Create **.env.local** file at root level
+Then add the following API keys, and replace with the actual key:
+- OPENTRIPMAP_API_KEY=your_opentripmap_api_key
+- UNSPLASH_ACCESS_KEY=your_unsplash_access_key
 
 5. run the development server:
 
