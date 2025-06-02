@@ -2,7 +2,33 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
-First, run the development server:
+Prerequisites:
+
+Node.js 
+npm or yarn
+
+# Installation
+
+1. Clone the repository and install dependencies:
+npm install
+# or
+yarn install
+# or
+pnpm install
+# or
+bun install
+
+2. Install required dependencies:
+npm install tailwindcss
+npm install @heroicons/react
+npm install react-slick slick-carousel
+
+4. Set up environment:
+Add the following API keys, replace with the actual key 
+OPENTRIPMAP_API_KEY=your_opentripmap_api_key
+UNSPLASH_ACCESS_KEY=your_unsplash_access_key
+
+5. run the development server:
 
 ```bash
 npm run dev
