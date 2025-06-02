@@ -86,7 +86,7 @@ Vue har ungefär som React en komponentbaserad struktur, vilket hade kunnat vara
 Angular är ett ramverk som innehåller många hjälpfulla lösningar för exempelvis routing och forms. Då vi använde oss av både routing och forms hade Angular eventuellt kunnat passa vårt projekt bra. Dock ansåg vi att Angular var överdimensionerat för just detta projekt. Inlärningskurvan för Angular var lite för brant för den tidsram och storlekt på projekt som denna uppgift innebar. Detta till skillnad från React + Next.js som gav oss flexibilitet med komponenter och API-användning utan extra onödig komplexitet. 
 
 
-# Länkar som motiverar vårt val av ramverk:
+## Länkar som motiverar vårt val av ramverk:
 - https://www.geeksforgeeks.org/react-vs-angular-vs-vue-which-framework-is-the-best/
 - https://www.w3schools.com/whatis/whatis_react.asp
 - https://www.geeksforgeeks.org/what-is-vuejs/
