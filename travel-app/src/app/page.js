@@ -89,6 +89,7 @@ export default function Home() {
 
   return (
     <div >
+    <div>
       <NavBar
         onBrowseClick={() => router.push("/")}
         onMyTripsClick={() => router.push("/favorites")}
@@ -127,10 +128,32 @@ export default function Home() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {destinationData.attractions.slice(0, 4).map((attraction, index) => (
                   <div key={index} className="bg-white rounded-lg p-4 shadow-sm">
-                    <h4 className="font-medium text-gray-800 mb-1">{attraction.name}</h4>
-                    <p className="text-sm text-gray-600 line-clamp-2">
-                      {attraction.description}
+                    <h4 className="font-medium text-gray-800 mb-1">
+                      {attraction.name}
+                      {attraction.rating > 0 && (
+                        <span className="text-sm text-orange-600 ml-2">
+                          {'⭐'.repeat(Math.round(attraction.rating))}
+                        </span>
+                      )}
+                    </h4>
+                    <p className="text-sm text-gray-600 mb-2">
+                      {attraction.description && attraction.description !== 'No description available' 
+                        ? (attraction.description.length > 100 
+                          ? `${attraction.description.substring(0, 100)}...` 
+                          : attraction.description)
+                        : ''
+                      }
                     </p>
+                    {attraction.wikipedia && (
+                      <a 
+                        href={attraction.wikipedia}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-green-600 hover:text-green-800 text-sm font-medium underline"
+                      >
+                        Visit Wikipedia to learn more
+                      </a>
+                    )}
                   </div>
                 ))}
               </div>

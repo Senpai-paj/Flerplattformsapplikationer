@@ -5,11 +5,9 @@ export async function GET(request) {
     const query = searchParams.get ('q');
     const getDetails = searchParams.get('details') === 'true';
 
-
     if (!query) {
         return NextResponse.json({error: 'Query parameter is required'}, { status: 400 });        
     }
-
 
     try {
         //Get the place and recieve the coordinates
@@ -21,7 +19,6 @@ export async function GET(request) {
         }
 
         const geoData = await geoResponse.json();
-       
 
         if (!geoData.lat || !geoData.lon) {
             return NextResponse.json({
@@ -61,35 +58,47 @@ export async function GET(request) {
 
         }
 
+        // Different types of attractions
+        const radius = 8000; 
+        const attractionTypes = [
+            'museums,cultural,historic,religion,architecture',
+            'interesting_places'
+        ];
 
-        const radius = 5000; // 5km radius
-        const attractionsUrl = `https://api.opentripmap.com/0.1/en/places/radius?radius=${radius}&lon=${geoData.lon}&lat=${geoData.lat}&kinds=interesting_places&format=json&limit=20&apikey=${process.env.OPENTRIPMAP_API_KEY}`;
+        let allAttractions = [];
 
-        const attractionsResponse = await fetch(attractionsUrl);
+        for (const kinds of attractionTypes) {
+            try {
+                const attractionsUrl = `https://api.opentripmap.com/0.1/en/places/radius?radius=${radius}&lon=${geoData.lon}&lat=${geoData.lat}&kinds=${kinds}&format=json&limit=15&apikey=${process.env.OPENTRIPMAP_API_KEY}`;
+                const attractionsResponse = await fetch(attractionsUrl);
 
-        if (!attractionsResponse.ok) {
-            console.warn(`Failed to fetch attractions: ${attractionsResponse.status}`);
-            // Return response with basic info but empty attractions array
-            return NextResponse.json({
-                name: geoData.name || query,
-                country: geoData.country || 'Unknown',
-                coordinates: {
-                    lat: geoData.lat,
-                    lon: geoData.lon
-                },
-                searched: query,
-                attractions: [],
-                totalAttractionsFound: 0,
-                message: 'Location found but attractions data unavailable'
-            });
-    }   
+                if (attractionsResponse.ok) {
+                    const attractionsData = await attractionsResponse.json();
+                    if (attractionsData && Array.isArray(attractionsData)) {
+                        allAttractions.push(...attractionsData);
+                    }
+                }
+                
+                // Small delay
+                await new Promise(resolve => setTimeout(resolve, 100));
+            } catch (error) {
+                console.warn(`Failed to fetch attractions for ${kinds}:`, error.message);
+            }
+        }
 
-        const attractionsData = await attractionsResponse.json();
+        // Remove duplicates and sort by rating
+        const uniqueAttractions = allAttractions.filter((attraction, index, self) => 
+            index === self.findIndex(a => a.xid === attraction.xid)
+        );
+
+        const sortedAttractions = uniqueAttractions
+            .filter(attraction => attraction.rate !== undefined && attraction.rate > 2) 
+            .sort((a, b) => (b.rate || 0) - (a.rate || 0))
+            .slice(0, 8); 
+
         const detailedAttractions = [];
-        const topAttractions = attractionsData.slice(0, 10); 
 
-
-        for (const attraction of topAttractions) {
+        for (const attraction of sortedAttractions) {
             if (attraction.xid) {
                 try {
                     const detailUrl = `https://api.opentripmap.com/0.1/en/places/xid/${attraction.xid}?apikey=${process.env.OPENTRIPMAP_API_KEY}`;
@@ -98,10 +107,21 @@ export async function GET(request) {
                     if (detailResponse.ok) {
                         const detailData = await detailResponse.json();
                         
-                        if (detailData.name && detailData.name.trim()) {
+                        
+                        if (detailData.name && detailData.name.trim() && detailData.name.length > 3) {
+                            
+                            let description = 'No description available';
+                            
+                            // Try to get description from Wikipedia
+                            if (detailData.wikipedia_extracts && detailData.wikipedia_extracts.text) {
+                                description = detailData.wikipedia_extracts.text;
+                            } else if (detailData.info && detailData.info.descr) {
+                                description = detailData.info.descr;
+                            }
+
                             detailedAttractions.push({
                                 name: detailData.name,
-                                description: detailData.wikipedia_extracts?.text || detailData.info?.descr || 'No description available',
+                                description: description,
                                 category: detailData.kinds || 'attraction',
                                 coordinates: {
                                     lat: attraction.point?.lat || attraction.lat,
@@ -114,14 +134,13 @@ export async function GET(request) {
                         }
                     }
                     
-                    // Add small delay to avoid rate limiting
-                    await new Promise(resolve => setTimeout(resolve, 100));
+                    // Add delay to avoid rate limiting
+                    await new Promise(resolve => setTimeout(resolve, 150));
                 } catch (error) {
                     console.warn(`Failed to fetch details for attraction ${attraction.xid}:`, error.message);
                 }
             }
         }
-
 
         const detailedResponse = {
             name: geoData.name || query,
@@ -132,12 +151,10 @@ export async function GET(request) {
             },
             searched: query,
             attractions: detailedAttractions,
-            totalAttractionsFound: attractionsData.length
+            totalAttractionsFound: uniqueAttractions.length
         };
 
-
         return NextResponse.json(detailedResponse);
-
 
     } catch (error) {
         console.error('An error for destinations API occurred', error);
