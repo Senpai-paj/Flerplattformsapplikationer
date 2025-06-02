@@ -19,9 +19,11 @@ pnpm install
 bun install
 
 2. Install required dependencies:
-npm install tailwindcss
-npm install @heroicons/react
-npm install react-slick slick-carousel
+npm install
+and / or
+- npm install tailwindcss
+- npm install @heroicons/react
+- npm install react-slick slick-carousel
 
 4. Set up environment:
 Add the following API keys, replace with the actual key 
@@ -79,3 +81,10 @@ Vue har ungefär som React en komponentbaserad struktur, vilket hade kunnat vara
 
 ## Jämförelse med Angular
 Angular är ett ramverk som innehåller många hjälpfulla lösningar för exempelvis routing och forms. Då vi använde oss av både routing och forms hade Angular eventuellt kunnat passa vårt projekt bra. Dock ansåg vi att Angular var överdimensionerat för just detta projekt. Inlärningskurvan för Angular var lite för brant för den tidsram och storlekt på projekt som denna uppgift innebar. Detta till skillnad från React + Next.js som gav oss flexibilitet med komponenter och API-användning utan extra onödig komplexitet. 
+
+
+# Länkar som motiverar vårt val av ramverk:
+- https://www.geeksforgeeks.org/react-vs-angular-vs-vue-which-framework-is-the-best/
+- https://www.w3schools.com/whatis/whatis_react.asp
+- https://www.geeksforgeeks.org/what-is-vuejs/
+- https://www.geeksforgeeks.org/what-is-angular/
