@@ -10,6 +10,7 @@ npm or yarn
 # Installation
 
 1. Clone the repository and install dependencies:
+```bash
 npm install
 # or
 yarn install
@@ -17,6 +18,7 @@ yarn install
 pnpm install
 # or
 bun install
+```
 
 2. Install required dependencies:
 npm install
